@@ -25,17 +25,17 @@ public class RobotMap {
 
         public static final int[] INTAKE_MOTOR_PORTS = { 21 };
         public static final int[] INTAKE_INVERTED_MOTORS_PORTS = {};
-        public static final TypeOfMotor[] INTAKE_MOTOR_TYPES = { TypeOfMotor.TALON_SRX };
+        public static final TypeOfMotor[] INTAKE_MOTOR_TYPES = { TypeOfMotor.SPARK_MAX_BRUSHED };
 
         //////////////////////// SHOOTER ////////////////////////
 
         public static final int[] SHOOTER_MOTOR_PORTS = { 31 };
         public static final int[] SHOOTER_INVERTED_MOTORS_PORTS = {};
-        public static final TypeOfMotor[] SHOOTER_MOTOR_TYPES = { TypeOfMotor.TALON_SRX };
+        public static final TypeOfMotor[] SHOOTER_MOTOR_TYPES = { TypeOfMotor.SPARK_MAX_BRUSHED };
 
         //////////////////////// KICKER ////////////////////////
 
         public static final int[] KICKER_MOTOR_PORTS = { 41 };
         public static final int[] KICKER_INVERTED_MOTORS_PORTS = {};
-        public static final TypeOfMotor[] KICKER_MOTOR_TYPES = { TypeOfMotor.TALON_SRX };
+        public static final TypeOfMotor[] KICKER_MOTOR_TYPES = { TypeOfMotor.SPARK_MAX_BRUSHED };
 }
