@@ -6,8 +6,10 @@ package frc.robot.constants;
 
 import frc.robot.commands.intake.IntakeIn;
 import frc.robot.commands.intake.IntakeOut;
+import frc.robot.commands.intake.StopIntake;
 import frc.robot.commands.kicker.KickerIn;
 import frc.robot.commands.kicker.KickerOut;
+import frc.robot.commands.shooter.ShooterIn;
 import frc.robot.commands.shooter.ShooterOn;
 import frc.robot.commands.shooter.StopShooter;
 import frc.robot.resources.joysticks.HighAltitudeJoystick;
@@ -49,12 +51,15 @@ public class OI {
 
                 copilot.onTrue(ButtonType.A, new ShooterOn());
                 copilot.whileTrue(ButtonType.B, new StopShooter());
+                copilot.whileTrue(ButtonType.Y, new ShooterIn());
 
                 copilot.onTrue(ButtonType.LB, new IntakeIn());
                 copilot.whileTrue(ButtonType.RB, new IntakeOut());
 
-                copilot.whileTrue(ButtonType.Y, new KickerIn());
-                copilot.whileTrue(ButtonType.X, new IntakeOut());
+                copilot.whileTrue(ButtonType.POV_S, new KickerIn());
+                copilot.whileTrue(ButtonType.POV_N, new KickerOut());
+
+                copilot.whileTrue(ButtonType.X, new StopIntake());
                 break;
 
             default:
