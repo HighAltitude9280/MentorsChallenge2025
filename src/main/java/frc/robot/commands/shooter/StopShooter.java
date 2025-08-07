@@ -2,43 +2,38 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.drive;
+package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
-import frc.robot.constants.OI;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class FicDrive extends Command {
-  Drivetrain drivetrain;
+public class StopShooter extends Command {
+  Shooter shooter;
 
-  /** Creates a new FicDrive. */
-  public FicDrive() {
-    drivetrain = Robot.getRobotContainer().getDrivetrain();
+  /** Creates a new StopShooter. */
+  public StopShooter() {
+    shooter = Robot.getRobotContainer().getShooter();
+    addRequirements(shooter);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    shooter.stopShooter();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = OI.getInstance().getFicSpeed();
-    double turnFast = OI.getInstance().getFicTurnFast();
-    double turnSlow = OI.getInstance().getFicTurnSlow();
-    double turn = turnFast + turnSlow;
-
-    drivetrain.drive(speed, turn);
-
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    shooter.stopShooter();
   }
 
   // Returns true when the command should end.

@@ -31,13 +31,10 @@ public class KickerOut extends Command {
     kicker.set(HighAltitudeConstants.KICKER_OUT_SPEED);
   }
 
-  public void stop() {
-    kicker.stopKicker();
-  }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    kicker.stopKicker();
   }
 
   // Returns true when the command should end.

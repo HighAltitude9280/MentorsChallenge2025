@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.commands.drive.FicDrive;
 import frc.robot.constants.OI;
 import frc.robot.resources.components.Navx;
 import frc.robot.subsystems.Drivetrain;
@@ -24,6 +25,9 @@ public class RobotContainer {
   public RobotContainer() {
     navx = new Navx();
     drivetrain = new Drivetrain();
+    intake = new Intake();
+    kicker = new Kicker();
+    shooter = new Shooter();
   }
 
   public Navx getNavx() {
@@ -49,7 +53,7 @@ public class RobotContainer {
   public void configureButtonBindings() {
 
     OI.getInstance().ConfigureButtonBindings();
-    // drivetrain.setDefaultCommand(new DefaultDrive());
+    drivetrain.setDefaultCommand(new FicDrive());
   }
 
   public Command getAutonomousCommand() {

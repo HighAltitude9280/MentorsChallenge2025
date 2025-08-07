@@ -31,13 +31,10 @@ public class ShooterIn extends Command {
     shooter.set(HighAltitudeConstants.SHOOTER_IN_SPEED);
   }
 
-  public void stop() {
-    shooter.stopShooter();
-  }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    shooter.stopShooter();
   }
 
   // Returns true when the command should end.

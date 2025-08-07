@@ -6,16 +6,27 @@ package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
-import frc.robot.constants.OI;
+import frc.robot.resources.components.Navx;
 import frc.robot.subsystems.Drivetrain;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class FicDrive extends Command {
+public class TurnTo extends Command {
   Drivetrain drivetrain;
+  Navx navx;
+  double actualAngle;
+  double target;
+  double breakingAngle;
+  double difference;
 
-  /** Creates a new FicDrive. */
-  public FicDrive() {
+  /** Creates a new TurnTo90. */
+  public TurnTo(double target, double breakingAngle) {
+    this.target = target;
+    this.breakingAngle = breakingAngle;
+
     drivetrain = Robot.getRobotContainer().getDrivetrain();
+    navx = Robot.getRobotContainer().getNavx();
+    addRequirements(drivetrain);
+    difference = target - 6;
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -27,23 +38,22 @@ public class FicDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = OI.getInstance().getFicSpeed();
-    double turnFast = OI.getInstance().getFicTurnFast();
-    double turnSlow = OI.getInstance().getFicTurnSlow();
-    double turn = turnFast + turnSlow;
-
-    drivetrain.drive(speed, turn);
-
+    actualAngle = navx.getYaw();
+    drivetrain.turnTo(actualAngle, target, breakingAngle, 0.63);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    drivetrain.drive(0, 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (actualAngle > difference) {
+      return true;
+    }
     return false;
   }
 }

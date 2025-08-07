@@ -11,7 +11,7 @@ public class HighAltitudeConstants {
 
         //////////////////////// DRIVERS ////////////////////////
 
-        public static final HumanDrivers CURRENT_PILOT = HumanDrivers.JoakinButChambing;
+        public static final HumanDrivers CURRENT_PILOT = HumanDrivers.RichiFic;
         public static final HumanDrivers CURRENT_COPILOT = HumanDrivers.CopilotProgramming;
 
         //////////////////////// DRIVETRAIN ////////////////////////
@@ -20,6 +20,10 @@ public class HighAltitudeConstants {
         public static final double DRIVETRAIN_TURN_KP = 0;
         public static final double DRIVETRAIN_TURN_KI = 0;
         public static final double DRIVETRAIN_TURN_KD = 0;
+
+        public static final double DRIVETRAIN_TURN_OFFSET = 10;
+
+        public static final double DRIVETRAIN_FIC_SLOW_TURN = 0.5;
 
         //////////////////////// INTAKE ////////////////////////
         /// Valores posibles
@@ -39,5 +43,4 @@ public class HighAltitudeConstants {
         public static final double SHOOTER_IN_SPEED = 0.8;
         public static final double SHOOTER_OUT_SPEED = -0.3;
 
-        public static final double DRIVETRAIN_FIC_SLOW_TURN = 0.5;
 }

@@ -15,7 +15,10 @@ import frc.robot.resources.math.Math;
 public class Drivetrain extends SubsystemBase {
 
   public static HighAltitudeMotorGroup leftMotors, rightMotors;
+
   private final PIDController turnController;
+
+  private boolean onTarget = false;
 
   public Drivetrain() {
 
@@ -46,10 +49,21 @@ public class Drivetrain extends SubsystemBase {
     drive(0, turnPower);
   }
 
-  public void snapToAngle(double targetAngle, double breakingAngle, double maxPower) {
-    double actualAngle = Robot.getRobotContainer().getNavx().getYaw();
-    double turnPower = turnController.calculate(actualAngle, targetAngle);
+  public void snapToAngle(double targetAngle, double maxPower) {
+    double turnPower = turnController.calculate(getCurrentYaw(), targetAngle);
+    turnPower = Math.clamp(turnPower * maxPower, -maxPower, maxPower);
     drive(0, turnPower);
+
+    double delta = targetAngle - getCurrentYaw();
+    this.onTarget = Math.abs(delta) < HighAltitudeConstants.DRIVETRAIN_TURN_OFFSET;
+  }
+
+  public double getCurrentYaw() {
+    return Robot.getRobotContainer().getNavx().getYaw();
+  }
+
+  public boolean onTarget() {
+    return this.onTarget;
   }
 
   @Override

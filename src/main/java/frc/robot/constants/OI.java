@@ -4,8 +4,15 @@
 
 package frc.robot.constants;
 
+import frc.robot.commands.intake.IntakeIn;
+import frc.robot.commands.intake.IntakeOut;
+import frc.robot.commands.kicker.KickerIn;
+import frc.robot.commands.kicker.KickerOut;
+import frc.robot.commands.shooter.ShooterOn;
+import frc.robot.commands.shooter.StopShooter;
 import frc.robot.resources.joysticks.HighAltitudeJoystick;
 import frc.robot.resources.joysticks.HighAltitudeJoystick.AxisType;
+import frc.robot.resources.joysticks.HighAltitudeJoystick.ButtonType;
 import frc.robot.resources.joysticks.HighAltitudeJoystick.JoystickType;
 
 /** Add your docs here. */
@@ -21,11 +28,14 @@ public class OI {
 
         switch (HighAltitudeConstants.CURRENT_PILOT) {
 
-            case JoakinButChambing:
+            case RichiFic:
                 pilot = new HighAltitudeJoystick(0, JoystickType.XBOX);
 
-                pilot.setAxisDeadzone(AxisType.LEFT_Y, 0.1);
-                pilot.setAxisDeadzone(AxisType.RIGHT_X, 0.1);
+                pilot.setAxisDeadzone(AxisType.LEFT_X, 0.15);
+                pilot.setAxisDeadzone(AxisType.RIGHT_X, 0.15);
+
+                pilot.whileTrue(ButtonType.RB, new KickerOut());
+                pilot.whileTrue(ButtonType.LB, new KickerIn());
 
                 break;
 
@@ -37,6 +47,14 @@ public class OI {
             case CopilotProgramming:
                 copilot = new HighAltitudeJoystick(1, JoystickType.XBOX);
 
+                copilot.onTrue(ButtonType.A, new ShooterOn());
+                copilot.whileTrue(ButtonType.B, new StopShooter());
+
+                copilot.onTrue(ButtonType.LB, new IntakeIn());
+                copilot.whileTrue(ButtonType.RB, new IntakeOut());
+
+                copilot.whileTrue(ButtonType.Y, new KickerIn());
+                copilot.whileTrue(ButtonType.X, new IntakeOut());
                 break;
 
             default:
@@ -95,7 +113,7 @@ public class OI {
         return pilot.getAxis(AxisType.RIGHT_X);
     }
 
-    public double getFicSpeed(){
+    public double getFicSpeed() {
         return pilot.getTriggers();
     }
 
